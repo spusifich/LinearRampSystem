@@ -197,7 +197,7 @@ Let $Q$ be any point such that $Q\in\kappa$. Let $\alpha$ be some scalar such th
 \end{proof}
 
 \begin{theorem} \label{cornerpointproof}
-Given an $n$-dimensional cell $\kappa$, if $\sgn(p,k)$ is the same for all $p\in \bbP (\kappa)$,  then $\sgn(\kappa,k)=\sgn(p,k)$. 
+Given an $n$-dimensional cell $\kappa$, if and only if $\sgn(p,k)$ is the same for all $p\in \bbP (\kappa)$,  then $\sgn(\kappa,k)=\sgn(p,k)$. 
 \end{theorem}
 
 \begin{proof}
@@ -207,7 +207,7 @@ Now suppose this is true for all $n$-dimensional systems in the form of \eqref{g
 \begin{equation} \label{gensys2}
 \dot{x}_j=-\gamma_j x_j + \sum_{I\in \mathcal{I}}\left(\prod_{i\in I}\sigma_{ji}(x_i)\right)	\qquad	j=1,\dots,n,n+1
 \end{equation}
-Let $\kappa$ be a cell of system \eqref{gensys2} and let $\tau_1$ be a wall of $\kappa$ such that $\tau_1 \subseteq \{x_k=\vartheta_k\}$ for some constant $\vartheta_k$. Then system \eqref{gensys2} reduces to an $n$-dimensional system on the heyperplane described by $\{x_k=\vartheta_k\}$. Then $\tau_1$ is analogous to some $\kappa'$ of the $n$-dimensional system, and if $\sgn(p_j,k)$ is the same for all $p\in \bbP (\kappa)$, then $\sgn(p,k)$ is the same for all $p\in \bbP (\kappa')$, and so by the inductive hypothesis $\sgn(p,k)=\sgn(\kappa',k)=\sgn(\tau_1,k)$. We repeat this for some $\tau_2$ where $\tau_2 \subseteq \{x_k=\vartheta_k'\}$, such that $\vartheta' > \vartheta$. Then by Theorem \ref{straightlineproof}, since $\sgn(p,k)=\sgn(\tau_1,k)=\sgn(\tau_2,k)$, then $\sgn(p,k)=\sgn(\kappa,k)$.
+Let $\kappa$ be a cell of system \eqref{gensys2} and let $\tau_1$ be a wall of $\kappa$ such that $\tau_1 \subseteq \{x_k=\vartheta_k\}$ for some constant $\vartheta_k$. Then system \eqref{gensys2} reduces to an $n$-dimensional system on the heyperplane described by $\{x_k=\vartheta_k\}$. Then $\tau_1$ is isomorphic to some $\kappa'$ of the $n$-dimensional system, and if $\sgn(p_j,k)$ is the same for all $p\in \bbP (\kappa)$, then $\sgn(p,k)$ is the same for all $p\in \bbP (\kappa')$, and so by the inductive hypothesis $\sgn(p,k)=\sgn(\kappa',k)=\sgn(\tau_1,k)$. We repeat this for some $\tau_2$ where $\tau_2 \subseteq \{x_k=\vartheta_k'\}$, such that $\vartheta_k'$ and $\vartheta_k$ are consecutive with $\vartheta_k' > \vartheta_k$. Then by Theorem \ref{straightlineproof}, $\sgn(\tau_1,k)=\sgn(\tau_2,k)=\sgn(\kappa,k)$.
 \end{proof}
 
 \end{document}
