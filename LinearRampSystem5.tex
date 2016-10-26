@@ -126,17 +126,21 @@ We defined two cells $\kappa$ and $\kappa'$ as adjacent if
  R & \text{ if } i \in \alpha_R'
  \end{cases}
  \end{equation*}
- where $\alpha_R$ and $\alpha_C$ partition $\{1,\dots,n\}$ and there exists some $k\in \{1,\dots,n\}$ such that $\alpha_C'=\alpha_C\setminus \{k\}$ and $\alpha_R'=\alpha_R\cup \{k\}$. Then $\kappa'$ is an $(m+1)$-cell, where $m$ is the cardinality of $\alpha_R$.
+ where $\alpha_R$ and $\alpha_C$ partition $\{1,\dots,n\}$ and there exists some $k\in \{1,\dots,n\}$ such that $\alpha_C'=\alpha_C\setminus \{k\}$ and $\alpha_R'=\alpha_R\cup \{k\}$, and $I_{C,k}$ and $I_{R,k}$ are adjacent intervals. Then $\kappa'$ is an $(m+1)$-cell, where $m$ is the cardinality of $\alpha_R$.
  
 We define the $n-1$ dimensional hyperplane $\kappa \cap \kappa'$ as the \textit{wall} between cells $\kappa$ and $\kappa'$ as the product
 \begin{equation*}
 \tau:=\prod_{i=1}^{k-1} I_{*,i} \times \{\vartheta_k\} \times \prod_{i=k+1}^{n} I_{*,i}
 \end{equation*}
-where $\vartheta_k = I_{R,k} \cap I_{C,k}$. We refer to $\tau$ as a wall of an $m$-cell $\kappa$.
+where $\vartheta_k = \theta_{jk} \pm \frac{\epsilon}{2}$ for some $j$. We refer to $\tau$ as a wall of the $m$-cell $\kappa$.
 \end{defn}
 
+\begin{remark}
+It is worth noting that all cells and walls are closed. Also, note that we use $\theta_{ji}+\frac{\epsilon}{2}$, with two subscripts, to denote a threshold of system \eqref{generalsystem}, and $\vartheta_k$, with one subscript, to denote some constant that is the endpoint of some interval of $x_k$.
+\end{remark}
+
 \begin{defn}
-Let $\kappa$ be some cell of $\bbR^n$ with associated $\alpha_R$ and $\alpha_C$. From Definition \ref{IntervalType}, for each $i\in\alpha_R$ and corresponding $I_{R,i}$, let $r_i^+$ and $r_i^-$ be constants such that $I_{R,i}=[r_i^-,r_i^+]$, and for each $i\in\alpha_C$ and corresponding $I_{R,i}$, let $c_i^+$ and $c_i^-$ be constants such that $I_{C,i}=[c_i^-,c_i^+]$. Let $p_i$ be the set defined as 
+Let $\kappa$ be some cell of $\bbR^n$ with associated $\alpha_R$ and $\alpha_C$. From Definition \ref{IntervalType}, for each $i\in\alpha_R$ and corresponding $I_{R,i}$, let $r_i^+$ and $r_i^-$ be constants such that $I_{R,i}=[r_i^-,r_i^+]$, and for each $i\in\alpha_C$ and corresponding $I_{R,i}$, let $c_i^+$ and $c_i^-$ be constants such that if $I=[\theta_{qi}+\frac{\epsilon}{2},\theta_{ri}-\frac{\epsilon}{2}]$ then $I_{C,i}=[c_i^-,c_i^+]$, or {\color{cyan} Dissipative System here} . Let $P_i$ be the set defined as 
 \begin{equation*}
 P_i :=
 \begin{cases}
@@ -151,12 +155,8 @@ We define the set of \textit{corner points} of a cell $\kappa$, denoted $\bbP(\k
 Notice that the cardinality of $\bbP (\kappa)$ is $2^n$. Let $p_1,\dots,p_{2^n}$ be the elements of $\bbP (\kappa)$.
 \end{defn}
 
-\begin{remark}
-It is worth noting that all cells and walls are closed. Also, note that we use $\theta_{ji}+\frac{\epsilon}{2}$, with two subscripts, to denote a threshold of system \eqref{generalsystem}, and $\vartheta_k$, with one subscript, to denote some constant that is the endpoint of some interval of $x_k$.
-\end{remark}
-
 \begin{defn} \label{flowDefn}
-Suppose $H$ is some co-dimension $n-1$ hyperplane with normal vector $\vec{h}$ and suppose a vector $\dot{x}(P)$ such that $\dot{x}(P)=\langle \dot{x}_1(P),\dots,\dot{x}_n(P) \rangle$ where $\dot{x}_j(P)$ denotes $\dot{x}_j$ evaluated at some point $P$. We define the \textit{flow} of system \eqref{generalsystem} to be \textit{monotonic} in the direction of $\vec{h}$ on $H$ if $\forall$ points $P$ such that $P\in H$, $\vec{h}\cdot\vec{x}(P)>0$. 
+Suppose $H$ is some subset of a co-dimension $n-1$ hyperplane with normal vector $\vec{h}$ and suppose a vector $\dot{x}(P)$ such that $\dot{x}(P)=\langle \dot{x}_1(P),\dots,\dot{x}_n(P) \rangle$ where $\dot{x}_j(P)$ denotes $\dot{x}_j$ evaluated at some point $P$. We define the \textit{flow} of system \eqref{generalsystem} to be \textit{monotonic} in the direction of $\vec{h}$ on $H$ if $\forall$ points $P$ such that $P\in H$, $\vec{h}\cdot\vec{x}(P)>0$, and monotonic in the direction of $-\vec{h}$ on $H$ if $\forall$ points $P$ such that $P\in H$, $\vec{h}\cdot\vec{x}(P)<0$. 
 We define the flow to be bidirectional across $H$ if $\exists$ points $P_1,P_2$ such that $P_1,P_2 \in H$, $\vec{h}\cdot\vec{x}(P_1)>0$ and $\vec{h}\cdot\vec{x}(P_2)<0$.
 \end{defn}
 
@@ -189,11 +189,11 @@ Let $\tau\subseteq \{x_k=\vartheta_k\}$. Then $\vec{e}_k\perp \tau$ By definitio
 {\color{cyan} Peter: The next theorem is the straight-line proof. I've completely rewritten it to be much more general.}
 
 \begin{theorem} \label{straightlineproof}
-Suppose $\kappa$ is some cell in $\mathbb{R}^n$, and suppose $\tau$ and $\tau'$ are walls of $\kappa$ such that $\tau \subseteq \{x_k=\vartheta_k\}$ and $\tau' \subseteq \{x_k=\vartheta_k'\}$ with $\vartheta' > \vartheta$. If $\sgn(\tau,i)=\sgn(\tau',i)$, then $\sgn(\kappa,i)=\sgn(\tau,i)$.
+Suppose $\kappa$ is some cell in $\mathbb{R}^n$, and suppose $\tau$ and $\tau'$ are walls of $\kappa$ such that $\tau \subseteq \{x_k=\vartheta_k\}$ and $\tau' \subseteq \{x_k=\vartheta_k'\}$ with $\vartheta'_k > \vartheta_k$. If $\sgn(\tau,i)=\sgn(\tau',i)$, then $\sgn(\kappa,i)=\sgn(\tau,i)$.
 \end{theorem}
 
 \begin{proof}
-Let $Q$ be any point such that $Q\in\kappa$. Let $\alpha$ be some scalar such that $P=Q +\alpha \vec e_k $ and $P \in \tau$. Let $f(s)$ be a path such that $f:[0,1]\to\kappa$ and $f(s)$ is parameterized as $f(s)=  P + (\vartheta'-\vartheta)\vec e_ks$.  Note that then $f(0) \in \tau$ and $f(1) \in \tau'$, and that $Q\in f(s)$. If $x_k \notin \mathbf{S}(x_i)$, then $\frac{\partial}{\partial x_k}(\dot x_i)=0$, which implies that $\dot x_i$ is constant on $f(s)$, and so it follows that $\dot x_i (Q)=\dot x_i (f(0))=\dot x_i (f(1))$. However, if $x_k \in \mathbf{S}(x_i)$, then of $f(s)$, $\dot x_i$ is an affine function of $x_k$ only, and so $\frac{d}{ds}\dot x_i(f(s))$ is either $0$ or a non-zero constant, and so if $\sgn(\tau,i)=\sgn(\tau',i)=+1$, and then by Definition \ref{sgnDefn}, $\sgn(\kappa,i)=-1$. Definition \ref{sgnDefn}, then $\dot x_i (f(0))>0$ and $\dot x_i (f(1))>0$, and so $\dot x_i (Q))>0$, for all $Q\in\kappa$, and so Similarly if $\sgn(\tau,i)=\sgn(\tau',i)=-1$, then by Definition \ref{sgnDefn}, $\dot x_i (f(0))<0$ and $\dot x_i (f(1))<0$, and so $\dot x_i (Q))<0$ for all $Q\in \kappa$, and so $\sgn(\kappa,i)=-1$.
+Let $Q$ be any point such that $Q\in\kappa$. Let $\alpha$ be some scalar such that $P=Q +\alpha \vec e_k $ and $P \in \tau$. Let $f(s)$ be a path such that $f:[0,1]\to\kappa$ and $f(s)$ is parameterized as $f(s)=  P + (\vartheta'-\vartheta)\vec e_ks$.  Note that then $f(0) \in \tau$ and $f(1) \in \tau'$, and that $Q\in f(s)$. If $x_k$ is not a source of $x_i$, i.e. if $x_k \notin \mathbf{S}(x_i)$, or if $k\neq i$, then $\frac{\partial}{\partial x_k}(\dot x_i)=0$, which implies that $\dot x_i$ is constant on $f(s)$, and so it follows that $\dot x_i (Q)=\dot x_i (f(0))=\dot x_i (f(1))$. However, if $x_k \in \mathbf{S}(x_i)$, then on $f(s)$, $\dot x_i$ is an affine function of $x_k$ only, and so $\frac{d}{ds}\dot x_i(f(s))$ is either $0$ or a non-zero constant, and so if $\sgn(\tau,i)=\sgn(\tau',i)=+1$, and then by Definition \ref{sgnDefn}, $\dot x_i (f(0))>0$ and $\dot x_i (f(1))>0$, and so $\dot x_i (Q))>0$, for all $Q\in f(s)$. Similarly if $\sgn(\tau,i)=\sgn(\tau',i)=-1$, then by Definition \ref{sgnDefn}, $\dot x_i (f(0))<0$ and $\dot x_i (f(1))<0$, and so $\dot x_i (Q))<0$ for all $Q\in f(s)$. Since $Q$ was arbitrary the result follows by Definition \ref{sgnDefn}.
 \end{proof}
 
 \begin{theorem} \label{cornerpointproof}
@@ -208,16 +208,6 @@ Now suppose this is true for all $n$-dimensional systems in the form of \eqref{g
 \dot{x}_j=-\gamma_j x_j + \sum_{I\in \mathcal{I}}\left(\prod_{i\in I}\sigma_{ji}(x_i)\right)	\qquad	j=1,\dots,n,n+1
 \end{equation}
 Let $\kappa$ be a cell of system \eqref{gensys2} and let $\tau_1$ be a wall of $\kappa$ such that $\tau_1 \subseteq \{x_k=\vartheta_k\}$ for some constant $\vartheta_k$. Then system \eqref{gensys2} reduces to an $n$-dimensional system on the heyperplane described by $\{x_k=\vartheta_k\}$. Then $\tau_1$ is analogous to some $\kappa'$ of the $n$-dimensional system, and if $\sgn(p_j,k)$ is the same for all $p\in \bbP (\kappa)$, then $\sgn(p,k)$ is the same for all $p\in \bbP (\kappa')$, and so by the inductive hypothesis $\sgn(p,k)=\sgn(\kappa',k)=\sgn(\tau_1,k)$. We repeat this for some $\tau_2$ where $\tau_2 \subseteq \{x_k=\vartheta_k'\}$, such that $\vartheta' > \vartheta$. Then by Theorem \ref{straightlineproof}, since $\sgn(p,k)=\sgn(\tau_1,k)=\sgn(\tau_2,k)$, then $\sgn(p,k)=\sgn(\kappa,k)$.
-\end{proof}
-
-{\color{cyan} Peter: I left Theorem \ref{infiniteline} in for right now but I'm not sure if we want to keep it or not. I wrote it when we were focusing much more on the behavior of the nullclines.}
-
-\begin{theorem}	\label{infiniteline}
-Suppose $P$ is any point. Let $f(s)$ be a path parameterized as $f(s)=P+\vec{e}_j s$. Let $K:=\{f(s') \mid \dot{x}_k(f(s')) =0 \}$. Then $K$ is either empty or connected.
-\end{theorem}
-
-\begin{proof}
-Notice from system \eqref{generalsystem} that $\frac{\partial}{\partial x_j}(\dot{x}_k)$ is zero if $(x_j,x_k) \notin E$. Then $\dot{x}_k(f(s))$ is constant, and therefore either $K=f(s)$ or $K=\emptyset$. However, if $(x_j,x_k) \in E$, then $\frac{\partial}{\partial x_j}(\dot{x}_k(f(s)))$ is zero or a non-zero constant. Therefore, $\dot{x}_k(f(s))$ is monotonic, and the proof is immediate.
 \end{proof}
 
 \end{document}
