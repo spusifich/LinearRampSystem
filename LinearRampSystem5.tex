@@ -32,6 +32,8 @@
 \newcommand{\bbC}{\mathbb{C}}
 \newcommand{\bbQ}{\mathbb{Q}}
 \newcommand{\bbP}{\mathbb{P}}
+
+\newcommand{\abs}[1]{\left| #1 \right|} %shorthand absolute value
 \begin{document}
 
 Throughout this paper we will refer to a fixed regulatory network $\textnormal{\textbf{RN}} = (V,E)$ with network nodes $V = \{x_1,x_2,\dots,x_n\}$ and interactions $E \subset V \times V \times \{\rightarrow,\dashv\}$. We define the \textit{targets} of a node as
@@ -140,7 +142,7 @@ It is worth noting that all cells and walls are closed. Also, note that we use $
 \end{remark}
 
 \begin{defn} \label{cornersetdefn}
-Let $\kappa$ be some cell of $\bbR^n$ with associated $\alpha_R$ and $\alpha_C$. From Definition \ref{IntervalType}, for each $i\in\alpha_R$ and corresponding $I_{R,i}$, let $r_i^+$ and $r_i^-$ be constants such that $I_{R,i}=[r_i^-,r_i^+]$, and for each $i\in\alpha_C$ and corresponding $I_{R,i}$, let $c_i^+$ and $c_i^-$ be constants such that if $I=[\theta_{qi}+\frac{\epsilon_{qi}}{2},\theta_{ri}-\frac{\epsilon_{ri}}{2}]$ then $I_{C,i}=[c_i^-,c_i^+]$, or {\color{cyan} Dissipative System here} . Let $P_i$ be the set defined as 
+Let $\kappa$ be some cell of $\bbR^n$ with associated $\alpha_R$ and $\alpha_C$. From Definition \ref{IntervalType}, for each $i\in\alpha_R$ and corresponding $I_{R,i}$, let $r_i^+$ and $r_i^-$ be constants such that $I_{R,i}=[r_i^-,r_i^+]$, and for each $i\in\alpha_C$ and corresponding $I_{R,i}$, let $c_i^+$ and $c_i^-$ be constants such that if $I_{C,i}=[\theta_{qi}+\frac{\epsilon_{qi}}{2},\theta_{ri}-\frac{\epsilon_{ri}}{2}]$ then $I_{C,i}=[c_i^-,c_i^+]$, or {\color{cyan} Dissipative System here} . Let $P_i$ be the set defined as 
 \begin{equation} \label{cornersetequation}
 P_i :=
 \begin{cases}
@@ -213,9 +215,30 @@ Now suppose this is true for all $n$-dimensional systems in the form of \eqref{g
 Let $\kappa$ be a cell of system \eqref{gensys2} and let $\tau_1$ be a wall of $\kappa$ such that $\tau_1 \subseteq \{x_k=\vartheta_k\}$ for some constant $\vartheta_k$. Then system \eqref{gensys2} reduces to an $n$-dimensional system on the heyperplane described by $\{x_k=\vartheta_k\}$. Then $\tau_1$ is isomorphic to some $\kappa'$ of the $n$-dimensional system, and if $\sgn(p_j,k)$ is the same for all $p\in \bbP (\kappa)$, then $\sgn(p,k)$ is the same for all $p\in \bbP (\kappa')$, and so by the inductive hypothesis $\sgn(p,k)=\sgn(\kappa',k)=\sgn(\tau_1,k)$. We repeat this for some $\tau_2$ where $\tau_2 \subseteq \{x_k=\vartheta_k'\}$, such that $\vartheta_k'$ and $\vartheta_k$ are consecutive with $\vartheta_k' > \vartheta_k$. Then by Theorem \ref{straightlineproof}, $\sgn(\tau_1,k)=\sgn(\tau_2,k)=\sgn(\kappa,k)$.
 \end{proof}
 
-With theorem \ref{cornerpointproof} we can now unambiguously determine $\sgn(\tau)$ of any wall $\tau$ given its associated corner point set $\bbP(\tau)$, if we know the sign of each point $p\in\bbP(\tau)$. From Remark \ref{cornerpointsin0cell}, each point $p$ is also in some wall $\tau'$ of some $0$-cell, and from Theorem \ref{0cellsdefined}, it is generic that that $\sgn(\tau')$ is defined, and so it follows that generically for all walls $\tau$ of $\textnormal{\textbf{RN}}$,  $\sgn(\tau)$ is defined, which leads to our algorithm for determining $\sgn(\tau)$. 
+With theorem \ref{cornerpointproof} we can now unambiguously determine $\sgn(\tau)$ of any wall $\tau$ given its associated corner point set $\bbP(\tau)$, if we know the sign of each point $p\in\bbP(\tau)$. From Remark \ref{cornerpointsin0cell}, each point $p$ is also in some wall $\tau'$ of some $0$-cell, and from Theorem \ref{0cellsdefined}, it is generic that $\sgn(\tau')$ is defined, and so it follows that generically for all walls $\tau$ of $\textnormal{\textbf{RN}}$,  $\sgn(\tau)$ is defined, which leads to our algorithm for determining $\sgn(\tau)$. 
 
 \section{Algorithm}
 {\color{cyan} Peter: Will I need to define the algorithm for assigning walls of 0-cells? Could I site DSRGN or the Parameter Graph paper or something?}
 
+{\color{cyan} Proof or argument of how after assigning all $0$-cell walls all corner points have defined sgn goes here.}
+\begin{defn}
+Suppose $\tau$ is some wall of an $m$-cell where $m\neq 0$, with associated $\alpha_C$ and $\alpha_R$. Let $\bbP (\tau)$ be the associated set of corner points. We define the \textit{reduced set of corner points}, denoted $\bar \bbP (\tau)$ as $
+\bar \bbP (\kappa) := \prod_{i=1}^n \bar P_i$,
+where $\bar P_i$ is the set defined as defined as
+\begin{equation*}
+\bar P_i :=
+\begin{cases}
+\{r_i^-,r_i^+\} &  \text{ if } i\in \alpha_R \\
+\{c_i^*\} &  \text{ if } i\in \alpha_C \\
+\end{cases}
+\end{equation*}
+where $c^*_i$ is an arbitrary value chosen such that $c^*_i \in I_{C,i}$. Note that the cardinality  $\bar \bbP (\tau)$ is $2^m$.  Let $\bar p_i$ be a component of $\bar \bbP (\tau)$.
+\end{defn}
+
+\noindent \textbf{Algorithm:} {\color{cyan} (Peter: No clue what to do formatting wise here.)}
+
+For each wall $\tau$ of an $m$-cell where $\tau \subseteq \{x_k=\vartheta_k\}$, let $\bbP (\tau)$ be the associated set of corner points, and let $\bar \bbP (\tau)$ be the reduced set of corner points. For each $\bar p_i \in  \bar \bbP (\tau)$, let $S_i := \sgn(\bar p_i, k)$. 
+\begin{equation} \label{algorithm}
+\text{If $\abs{\sum_{i=1}^{2^m}S_i}<\sum_{i=1}^{2^m}\abs{S_i}$, then $\sgn(\tau)=0$; otherwise $\sgn(\tau)=S_1$.}
+\end{equation}
 \end{document}
