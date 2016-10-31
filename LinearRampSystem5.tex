@@ -34,10 +34,6 @@
 \newcommand{\bbP}{\mathbb{P}}
 
 \newcommand{\abs}[1]{\left| #1 \right|} %shorthand absolute value
-
-% here is a useless edit
-
-
 \begin{document}
 
 Throughout this paper we will refer to a fixed regulatory network $\textnormal{\textbf{RN}} = (V,E)$ with network nodes $V = \{x_1,x_2,\dots,x_n\}$ and interactions $E \subset V \times V \times \{\rightarrow,\dashv\}$. We define the \textit{targets} of a node as
@@ -187,7 +183,7 @@ Let $A$ be any closed bounded region of $\bbR^n$, and let $P$ and $P'$ be points
 From Definitions \ref{flowDefn} and \ref{sgnDefn} that if $\tau$ is some wall in $\mathbb{R}^n$ such that $\tau \subseteq \{x_k=\vartheta_k\}$, then $\sgn(\tau,k)=+1$ implies that the flow is monotonic in the $\vec e_k$ direction across $\tau$, and similarly $\sgn(\tau,k)=-1$ implies that the flow is monotonic in the $-\vec e_k$ direction across $\tau$. We will occasionally use the notation $\sgn(\tau)$ to refer to $\sgn(\tau,k)$ where $\tau \subseteq \{x_k=\vartheta_k\}$. We will use this fact to construct the domain graph of system \eqref{generalsystem}.
 \end{remark}
 
-{\color{cyan} Peter: The next theorem and proof is incomplete, but I'll probably leave the proof to Thomas or Bree. The Generic proof argument still escapes me.}
+{\color{cyan} Peter: The next theorem and proof is incomplete, but I'll probably leave the proof to Tomas or Bree. The Generic proof argument still escapes me.}
 
 \begin{theorem} \label{0cellsdefined}
 Suppose $\kappa$ is a  $0$-cell, and $\tau$ is a face of $\kappa$. It is generic that $\sgn(\tau)\neq 0$.
@@ -216,10 +212,10 @@ Now suppose this is true for all $n$-dimensional systems in the form of \eqref{g
 \begin{equation} \label{gensys2}
 \dot{x}_j=-\gamma_j x_j + \sum_{I\in \mathcal{I}}\left(\prod_{i\in I}\sigma_{ji}(x_i)\right)	\qquad	j=1,\dots,n,n+1
 \end{equation}
-Let $\kappa$ be a cell of system \eqref{gensys2} and let $\tau_1$ be a wall of $\kappa$ such that $\tau_1 \subseteq \{x_k=\vartheta_k\}$ for some constant $\vartheta_k$. Then system \eqref{gensys2} reduces to an $n$-dimensional system on the heyperplane described by $\{x_k=\vartheta_k\}$. Then $\tau_1$ is isomorphic to some $\kappa'$ of the $n$-dimensional system, and if $\sgn(p_j,k)$ is the same for all $p\in \bbP (\kappa)$, then $\sgn(p,k)$ is the same for all $p\in \bbP (\kappa')$, and so by the inductive hypothesis $\sgn(p,k)=\sgn(\kappa',k)=\sgn(\tau_1,k)$. We repeat this for some $\tau_2$ where $\tau_2 \subseteq \{x_k=\vartheta_k'\}$, such that $\vartheta_k'$ and $\vartheta_k$ are consecutive with $\vartheta_k' > \vartheta_k$. Then by Theorem \ref{straightlineproof}, $\sgn(\tau_1,k)=\sgn(\tau_2,k)=\sgn(\kappa,k)$.
+Let $\kappa$ be a cell of system \eqref{gensys2} and let $\tau_1$ be a wall of $\kappa$ such that $\tau_1 \subseteq \{x_k=\vartheta_k\}$ for some constant $\vartheta_k$. Then system \eqref{gensys2} reduces to an $n$-dimensional system on the hyperplane described by $\{x_k=\vartheta_k\}$. Then $\tau_1$ is isomorphic to some $\kappa'$ of the $n$-dimensional system, and if $\sgn(p_j,k)$ is the same for all $p\in \bbP (\kappa)$, then $\sgn(p,k)$ is the same for all $p\in \bbP (\kappa')$, and so by the inductive hypothesis $\sgn(p,k)=\sgn(\kappa',k)=\sgn(\tau_1,k)$. We repeat this for some $\tau_2$ where $\tau_2 \subseteq \{x_k=\vartheta_k'\}$, such that $\vartheta_k'$ and $\vartheta_k$ are consecutive with $\vartheta_k' > \vartheta_k$. Then by Theorem \ref{straightlineproof}, $\sgn(\tau_1,k)=\sgn(\tau_2,k)=\sgn(\kappa,k)$.
 \end{proof}
 
-With theorem \ref{cornerpointproof} we can now unambiguously determine $\sgn(\tau)$ of any wall $\tau$ given its associated corner point set $\bbP(\tau)$, if we know the sign of each point $p\in\bbP(\tau)$. From Remark \ref{cornerpointsin0cell}, each point $p$ is also in some wall $\tau'$ of some $0$-cell, and from Theorem \ref{0cellsdefined}, it is generic that $\sgn(\tau')$ is defined, and so it follows that generically for all walls $\tau$ of $\textnormal{\textbf{RN}}$,  $\sgn(\tau)$ is defined, which leads to our algorithm for determining $\sgn(\tau)$. 
+With theorem \ref{cornerpointproof} we can now unambiguously determine $\sgn(\tau)$ of any wall $\tau$ given the sign of each point $p\in\bbP(\tau)$. From Remark \ref{cornerpointsin0cell}, each point $p$ is also in some wall $\tau'$ of some $0$-cell, and from Theorem \ref{0cellsdefined}, it is generic that $\sgn(\tau')$ is defined, and so it follows that generically for all walls $\tau$ of $\textnormal{\textbf{RN}}$,  $\sgn(\tau)$ is defined, which leads to our algorithm for determining $\sgn(\tau)$. 
 
 \section{Algorithm}
 {\color{cyan} Peter: Will I need to define the algorithm for assigning walls of 0-cells? Could I site DSRGN or the Parameter Graph paper or something?}
@@ -243,6 +239,6 @@ where $c^*_i$ is an arbitrary value chosen such that $c^*_i \in I_{C,i}$. Note t
 
 For each wall $\tau$ of an $m$-cell where $\tau \subseteq \{x_k=\vartheta_k\}$, let $\bbP (\tau)$ be the associated set of corner points, and let $\bar \bbP (\tau)$ be the reduced set of corner points. For each $\bar p_i \in  \bar \bbP (\tau)$, let $S_i := \sgn(\bar p_i, k)$. 
 \begin{equation} \label{algorithm}
-\text{If $\abs{\sum_{i=1}^{2^m}S_i}<\sum_{i=1}^{2^m}\abs{S_i}$, then $\sgn(\tau)=0$; otherwise $\sgn(\tau)=S_1$.}
+\text{If } \abs{\sum_{i=1}^{2^m}S_i}<\sum_{i=1}^{2^m}\abs{S_i},\text{ then }\sgn(\tau)=0;\text{ otherwise }\sgn(\tau)=S_1.
 \end{equation}
 \end{document}
