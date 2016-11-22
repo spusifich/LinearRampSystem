@@ -25,8 +25,10 @@
 \theoremstyle{remark}
 \newtheorem{remark}{Remark}[section]
 
-\newcommand\Tau{\mathrm{T}}
 \newcommand\sgn{\text{sgn}}
+
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cI}{\mathcal{I}}
 
 \newcommand{\bbR}{\mathbb{R}} %shorter commands for ``Blackboard Bold" letters
 \newcommand{\bbZ}{\mathbb{Z}}
@@ -53,7 +55,7 @@ We define a general system of \textbf{RN} as
 \begin{equation}	\label{generalsystem}
 \dot{x}_j=-\gamma_j x_j + \sum_{I\in \mathcal{I}}\left(\prod_{i\in I}\sigma_{ji}(x_i)\right)	\qquad	j=1,\dots,n
 \end{equation}
-where $\mathcal{I}\subseteq \mathscr{P} \{1,\dots,n\}$ and $\sigma_{ji}(x_i)$  is a linear ramp defined if $(x_i,x_j) \in E$ as
+where $\cI\subseteq \mathscr{P} (\{1,\dots,n\})$ and $\sigma_{ji}(x_i)$  is a linear ramp defined if $(x_i,x_j) \in E$ as
 \begin{equation}	\label{sigma}
 \sigma_{ji}(x_i):=
 \begin{cases}
@@ -97,73 +99,31 @@ The constants $u_{ji}$ and $l_{ji}$  and the thresholds $\theta_{ji}$ are as pre
 \begin{defn}	\label{IntervalType}
 We define a closed interval of $x_i$, denoted $I_{R,i}$, as \textit{Type R}, i.e. in a particular linear ramp region, if $\exists x_j\in\mathbf{T}(x_i)$ with associated thresholds $\theta_{ji}-\frac{\epsilon_{ji}}{2},\theta_{ji}+\frac{\epsilon_{ji}}{2}$ such that $I_{R,i}=\left[\theta_{ji}-\frac{\epsilon_{ji}}{2},\theta_{ji}+\frac{\epsilon_{ji}}{2}\right]$ for some $x_j \in \mathbf{T}(x_i)$.
 
-Notice that for all $x_i\in V$, the associated $\sum_{I\in \mathcal{I}}\left(\prod_{i\in I}\sigma_{ji}(x_i)\right)$ is bounded above and below. Then, for each  we can choose some $c_\text{min}$
+Notice that for all $x_i\in V$, the associated $\sum_{I\in \mathcal{I}}\left(\prod_{i\in I}\sigma_{ji}(x_i)\right)$ is bounded above and below, as it is the sum and product of finitely many bounded functions. Then, for each $i\in\{1,\dots,n\}$  we can choose some $c_{\min,i}$, such that $-\gamma_i x_i + \sum_{I\in \mathcal{I}}\left(\prod_{i\in I}\sigma_{ji}(x_i)\right)>0$ if $x_i<c_{\min,i}$ and for all $x_j\in\mathbf{T}(x_i)$, $\theta_{ji}-\frac{\epsilon_{ji}}{2},\theta_{ji}+\frac{\epsilon_{ji}}{2}>c_{\min,i}$, and we can choose some $c_{\max,i}$, such that $-\gamma_i x_i + \sum_{I\in \mathcal{I}}\left(\prod_{i\in I}\sigma_{ji}(x_i)\right)<0$ if $x_i>c_{\max,i}$ and for all $x_j\in\mathbf{T}(x_i)$, $\theta_{ji}-\frac{\epsilon_{ji}}{2},\theta_{ji}+\frac{\epsilon_{ji}}{2}<c_{\max,i}$.
 
-
-We define a closed interval of $x_i$, denoted $I_{C,i}$, as \textit{Type C} if $\exists x_q,x_r \in \mathbf{T}(x_i)$ with $q\neq r$ and $\theta_{qi}+\frac{\epsilon_{qi}}{2}<\theta_{ri}-\frac{\epsilon_{ri}}{2}$ such that $I_{c,i}:=[\theta_{qi}+\frac{\epsilon_{qi}}{2},\theta_{ri}-\frac{\epsilon_{ri}}{2}]$ or $I_{c,i}:=(-\infty,\theta_{qi}-\frac{\epsilon_{qi}}{2}]$ or $I_{c,i}:=[\theta_{ri}+\frac{\epsilon_{ri}}{2},\infty)$ and there is no Type R interval $I_{R,i}$ such that $I_{R,i}\subset I_{C,i}$. 
+We define a closed interval of $x_i$, denoted $I_{C,i}$, as \textit{Type C} if $\exists x_q,x_r \in \mathbf{T}(x_i)$ with $q\neq r$ and $\theta_{qi}+\frac{\epsilon_{qi}}{2}<\theta_{ri}-\frac{\epsilon_{ri}}{2}$ such that $I_{c,i}:=[\theta_{qi}+\frac{\epsilon_{qi}}{2},\theta_{ri}-\frac{\epsilon_{ri}}{2}]$ or $I_{c,i}:=[c_{\min,i},\theta_{qi}-\frac{\epsilon_{qi}}{2}]$ or $I_{c,i}:=[\theta_{ri}+\frac{\epsilon_{ri}}{2},c_{\max,i}]$ and there is no Type R interval $I_{R,i}$ such that $I_{R,i}\subset I_{C,i}$. 
 \end{defn}
-
-{\color{cyan} Peter: I'd like to get rid of the infinities as endpoints of the Type C intervals. Bree mentioned something about compact metric spaces or something of the like. Could that be used?}
 
 \begin{remark}
 From Definition \ref{IntervalType}, note that every Type R interval is connected to two Type C intervals.
 \end{remark}
 
-\begin{defn} \label{kappa}
- We divide phase space into \textit{cells}, denoted $\kappa$. We define $\kappa$ as the product of the closed intervals
- \begin{equation}	\label{kappadefn}
- \kappa:=\prod_{i=1}^n I_{*,i} \quad \text{ where } \quad *=
- \begin{cases} 
- C & \text { if } i\in\alpha_c \\
- R & \text{ if } i \in \alpha_R
- \end{cases}
- \end{equation}
- where $\alpha_R$ and $\alpha_C$ partition $\{1,\dots,n\}$. We label $\kappa$ a  $m$-cell, where $m$ is the cardinality of $\alpha_R$, because in $\kappa$, there are $m$ equations of system \eqref{generalsystem} that are in their linear ramp section.
-
-We defined two cells $\kappa$ and $\kappa'$ as adjacent if 
+\begin{defn}
+We divide phase space into \textit{boxes}, which we denote as $B_S$, where $S\in\mathscr{P}(\{1,\dots,n\})$, as the cross product of closed intervals 
 \begin{equation*}
-\kappa:=\prod_{i=1}^n I_{*,i} \quad \text{ where } \quad *=
- \begin{cases} 
- C & \text { if } i\in\alpha_C \\
- R & \text{ if } i \in \alpha_R
- \end{cases}
- \end{equation*}
- and 
- \begin{equation*}
-\kappa':=\prod_{i=1}^n I_{*',i} \quad \text{ where } \quad *'=
- \begin{cases} 
- C & \text { if } i\in\alpha_C' \\
- R & \text{ if } i \in \alpha_R'
- \end{cases}
- \end{equation*}
- where $\alpha_R$ and $\alpha_C$ partition $\{1,\dots,n\}$ and there exists some $k\in \{1,\dots,n\}$ such that $\alpha_C'=\alpha_C\setminus \{k\}$ and $\alpha_R'=\alpha_R\cup \{k\}$, and $I_{C,k}$ and $I_{R,k}$ are adjacent intervals. Then $\kappa'$ is an $(m+1)$-cell, where $m$ is the cardinality of $\alpha_R$.
- 
-We define the $n-1$ dimensional hyperplane $\kappa \cap \kappa'$ as the \textit{wall} between cells $\kappa$ and $\kappa'$ as the product
-\begin{equation*}
-\tau:=\prod_{i=1}^{k-1} I_{*,i} \times \{\vartheta_k\} \times \prod_{i=k+1}^{n} I_{*,i}
+B_S:=\prod^{n}_{i=1} 
+\begin{cases}
+I_{C,i} & \text{if } i\in\alpha_{C,S}\\
+I_{R,i} & \text{if } i\in\alpha_{R,S}\\
+\{f_i\} & \text{if } i\in \{1,\dots,n\}\setminus S
+\end{cases}
 \end{equation*}
-where $\vartheta_k = \theta_{jk} \pm \frac{\epsilon_{jk}}{2}$ for some $j$. We refer to $\tau$ as a wall of the $m$-cell $\kappa$.
+where $\alpha_{C,S}$ and $\alpha_{R,S}$ partition $S$ and $f_i$ is any arbitrary constant. We classify a box $B_S$ as a\textit{cell}, denoted $\kappa$, if $S=\{1,\dots,n\}$, and as a \textit{wall}, denoted $\tau$, if $S=\{1,\dots,n\}\setminus k$ for some $k$ and $f_k=\vartheta_k$ where $\vartheta_k$ is the endpoint of some Type C or Type R interval. We say $\tau$ is a wall of some cell $\kappa$ if and only if $\tau\subset \kappa$.
 \end{defn}
 
 \begin{remark}
 It is worth noting that all cells and walls are closed. Also, note that we use $\theta_{ji}+\frac{\epsilon_{ji}}{2}$, with two subscripts, to denote a threshold of system \eqref{generalsystem}, and $\vartheta_k$, with one subscript, to denote some constant that is the endpoint of some interval of $x_k$.
 \end{remark}
-
-%\begin{defn} \label{cornersetdefn}
-%Let $\kappa$ be some cell of $\bbR^n$ with associated $\alpha_R$ and $\alpha_C$. From Definition \ref{IntervalType}, for each $i\in\alpha_R$ and corresponding $I_{R,i}$, let $r_i^+$ and $r_i^-$ be constants such that $I_{R,i}=[r_i^-,r_i^+]$, and for each $i\in\alpha_C$ and corresponding $I_{R,i}$, let $c_i^+$ and $c_i^-$ be constants such that if $I_{C,i}=[\theta_{qi}+\frac{\epsilon_{qi}}{2},\theta_{ri}-\frac{\epsilon_{ri}}{2}]$ then $I_{C,i}=[c_i^-,c_i^+]$, or {\color{cyan} Dissipative System here} . Let $P_i$ be the set defined as 
-%\begin{equation} \label{cornersetequation}
-%P_i :=
-%\begin{cases}
-%\{r_i^-,r_i^+\} &  \text{ if } i\in \alpha_R \\
-%\{c_i^-,c_i^+\} &  \text{ if } i\in \alpha_C \\
-%\end{cases}
-%\end{equation}
-%We define the set of \textit{corner points} of a cell $\kappa$, denoted $\bbP(\kappa)$, as the product of sets 
-%\begin{equation*}
-%\bbP (\kappa) := \prod_{i=1}^n P_i
-%\end{equation*}
-%Notice that the cardinality of $\bbP (\kappa)$ is $2^n$. Let $p_1,\dots,p_{2^n}$ be the elements of $\bbP (\kappa)$.
-%\end{defn}
 
 \begin{defn} \label{flowDefn}
 Suppose $H$ is some subset of a co-dimension $n-1$ hyperplane with normal vector $\vec{h}$ and suppose a vector $\dot{x}(P)$ such that $\dot{x}(P)=\langle \dot{x}_1(P),\dots,\dot{x}_n(P) \rangle$ where $\dot{x}_j(P)$ denotes $\dot{x}_j$ evaluated at some point $P$. We define the \textit{flow} of system \eqref{generalsystem} to be \textit{monotonic} in the direction of $\vec{h}$ on $H$ if $\forall$ points $P$ such that $P\in H$, $\vec{h}\cdot\vec{x}(P)>0$, and monotonic in the direction of $-\vec{h}$ on $H$ if $\forall$ points $P$ such that $P\in H$, $\vec{h}\cdot\vec{x}(P)<0$. 
@@ -209,57 +169,54 @@ We will use this fact to construct the domain graph of system \eqref{generalsyst
 %\end{proof}
 
 \begin{defn}
-Let $A$ be a closed region of $\bbR^n$ such that $A:=\prod^{n}_{i=1}a_i$ where 
+Suppose $B_S$ is a box in $\bbR^n$ with associated $\alpha_{C,S}$ and $\alpha_{R,S}$.  For each $i\in\alpha_C$, let $c_i^+$ and $c_i^-$ be the endpoints of $I_{C,i}$ such that $I_{C,i}=[c_i^-,c_i^+]$, and for each $i\in\alpha_R$, let $r_i^+$ and $r_i^-$ be the endpoints of $I_{R,i}$ such that $I_{R,i}=[r_i^-,r_i^+]$. We define the set of \textit{corner points} of $B$, denoted $\cC(B)$, where
 \begin{equation*}
-a_i =
-\begin{cases}
-I_{C,i} & \text{if } i\in\alpha_C\\
-I_{R,i} & \text{if } i\in\alpha_R\\
-\{f_i\} & \text{otherwise}
-\end{cases}
-\end{equation*}
-and $\alpha_C$ and $\alpha_R$ partition some subset of $\{1,\dots,n\}$, $I_{C,i}$ is some Type C interval of $x_i$, $I_{R,i}$ is some Type R interval of $x_i$, and $f_i$ is any arbitrary constant. For each $i\in\alpha_C$, let $c_i^+$ and $c_i^-$ be the endpoints of $I_{C,i}$ such that $I_{C,i}=[c_i^-,c_i^+]$, and for each $i\in\alpha_R$, let $r_i^+$ and $r_i^-$ be the endpoints of $I_{R,i}$ such that $I_{R,i}=[r_i^-,r_i^+]$. We define the set of \textit{corner points} of $A$ as $\bbP(A)$, where
-\begin{equation*}
-\bbP(A):=\prod_{i=1}^n P_i \quad \text{where} \quad P_i=\begin{cases}
-\{c_i^-,c_i^+\} & \text{if } i\in\alpha_C \\
-\{r_i^-,r_i^+\} & \text{if } i\in\alpha_R \\
-\{f_i\} & \text{otherwise}
+\cC(B):=\prod_{i=1}^n P_i \quad \text{where} \quad P_i=\begin{cases}
+\{c_i^-,c_i^+\} &	\text{if } i\in\alpha_C \\
+\{r_i^-,r_i^+\} &	\text{if } i\in\alpha_R \\
+\{f_i\} 		&	\text{if } i\in \{1,\dots,n\}\setminus S
 \end{cases}
 \end{equation*}
 \end{defn}
 
 \begin{theorem} \label{straightlineproof}
-Suppose $A$ be a closed region of $\bbR^n$ with associated $\alpha_C$ and $\alpha_R$, and suppose $\alpha_C \cup \alpha_R \neq \emptyset$. For some $k\in \alpha_C \cup \alpha_R$, let $I_{*,k}$ be the associated interval, and let $\vartheta_k$ and $\vartheta_k'$ be the endpoints of $I_{*,k}$ such that $I_{*,k}=[\vartheta_k,\vartheta_k']$. Let $W:=A\cap \{x_k=\vartheta_k\}$ and let $W':=A\cap \{x_k=\vartheta_k'\}$. If $\sgn(W,j)=\sgn(W',j)\neq 0$, then $\sgn(W,j)=\sgn(A,j)$.
+Let $B_S$ be any box in $\bbR^n$ with associated $\alpha_{C,S}$ and $\alpha_{R,S}$ such that $\alpha_{C,S} \cup \alpha_{R,S} \neq \emptyset$. For some $k\in \alpha_C \cup \alpha_R$, let $I_{*,k}$ be the associated interval, and let $\vartheta_k$ and $\vartheta_k'$ be the endpoints of $I_{*,k}$ such that $I_{*,k}=[\vartheta_k,\vartheta_k']$. Let $W:=A\cap \{x_k=\vartheta_k\}$ and let $W':=A\cap \{x_k=\vartheta_k'\}$. If $\sgn(W\cup W',j)\neq 0$, then $\sgn(W\cup W',j)=\sgn(A,j)$, for any $j\in\{1,\dots,n\}$.
 \end{theorem}
 
 \begin{proof}
-Suppose $Q$ is any point such that $Q\in A$. Then there exists some scalar $\beta\geq 0$ such that $Q-\beta \vec e_k\in W$. Let $f:[0,1]\to A$ be a function such that $f(s)=(Q-\beta \vec e_k) + s(\vartheta_k'=\vartheta_k) \vec e_k$ for $0\leq s \leq 1$. Note that $f(0)\in W$ and $f(0)\in W'$. Also note that from system \eqref{generalsystem}, $\dot x_j$ is an affine function of only $x_k$ on $f(s)$. Recall from Definition \ref{sgnDefn}, if $\sgn(W,j)=\sgn(W',j)=+1$, then $\dot x_j (f(0))>0$ and $\dot x_j (f(1))>0$. It follows that for all $s^*\in [0,1]$, $\dot x_j (f(s^*))>0$, and so  $\dot x_j (Q))>0$. As $Q$ was arbitrary, then from Definition \ref{sgnDefn}, $\sgn(A,j)=\sgn(W,j)$. A similar argument is used when $\sgn(W,j)=\sgn(W',j)=-1$.
+Suppose $Q$ is any point such that $Q\in B_S$. Then there exists some scalar $\beta\geq 0$ such that $Q-\beta \vec e_k\in W$. Let $f:[0,1]\to B_S$ be a function such that $f(s)=(Q-\beta \vec e_k) + s(\vartheta_k'-\vartheta_k) \vec e_k$ for $0\leq s \leq 1$. Note that $f(0)\in W$ and $f(1)\in W'$. Also note that from system \eqref{generalsystem}, $\dot x_j$ is either a constant function or an affine function of only $x_k$ on $f(s)$. Recall from Definition \ref{sgnDefn}, if $\sgn(W\cup W',j)=+1$, then $\dot x_j (f(0))>0$ and $\dot x_j (f(1))>0$. It follows that for all $s^*\in [0,1]$, $\dot x_j (f(s^*))>0$, and so  $\dot x_j (Q))>0$. As $Q$ was arbitrary, then from Definition \ref{sgnDefn}, $\sgn(W\cup W',j)=\sgn(A,j)$. A similar argument is used when $\sgn(W \cup W',j)=-1$.
 \end{proof}
 
 \begin{theorem} \label{cornerpointproof}
-Let $A$ be a closed region of $\bbR^n$ with associated $\alpha_C$ and $\alpha_R$. If and only if for all $p\in\bbP(A)$, $\sgn(p,j)$ is defined and the same, then $\sgn(A,j)=\sgn(p_1,j)$.
+Let $B_S$ be a box in $\bbR^n$. For all $j\in\{1,\dots,n\}$, if $\sgn(\cC(B_S),j)$ is defined, then $\sgn(\cC(B_S),j)=\sgn(B_S,j)$.
 \end{theorem}
 
 \begin{proof}
-First we will show the converse direction. Suppose $\sgn(A,j)=\sgn(p_1,j)$. Note that for a single point $p_1$, $\sgn(p_1,j)\neq 0$, and so $\sgn(A,j)\neq 0$, and the proof is immediate from Definition \ref{sgnDefn}.
+We will first address the case where $\sgn(\cC(B_S),j)=0$. Note that $\cC(B_S) \subseteq B_S$, and by Definition \ref{sgnDefn} the proof is immediate.
 
-Now we will show the forward direction. Suppose $n=1$. If $1\notin \alpha_C \cup \alpha_R$, then $A=\{f_1\}$, and therefore $A=\bbP(A)$ and $\sgn(A,1)=\sgn(p_1,1)$. However, if $1\in \alpha_C \cup \alpha_R$, then $A=I_{*,1}=[\vartheta_1,\vartheta_1']$. Let $W=\{\vartheta_1\}$ and $W'=\{\vartheta'_1\}$. Note that $\bbP(A)=\{W,W'\}$, and so by Theorem \ref{straightlineproof} the theorem holds.
-
-Now assume for all $n$-dimensional systems in the form of \eqref{generalsystem} the theorem holds. Consider any $(n+1)$-dimensional system in the form of \eqref{generalsystem}. Let $A$ be a closed region of $\bbR^{(n+1)}$ with associated $\alpha_C$ and $\alpha_R$, and suppose for all $p\in\bbP(A)$, $\sgn(p,j)$ is defined and the same. If $\alpha_C \cup \alpha_R=\emptyset$, then $A$ is a single point and the proof is immediate. If $\alpha_C \cup \alpha_R \neq \emptyset$, then we can find some $k\in \alpha_C \cup \alpha_R$. Let $I_{*,k}$ be the associated interval of $A$ with endpoints $\vartheta_k$ and $\vartheta_k'$. Let $W=A \cap \{x_k=\vartheta_k\}$ and $W'=A \cap \{x_k=\vartheta_k'\}$. Notice that on the hyperplane $\{x_k=\vartheta_k\}$, the system reduces to an $n$-dimensional system. Also note that $\bbP(W)\subseteq\bbP(A)$, and so by assumption $\sgn(W,j)=\sgn(p_1,j)$. By a similar argument $\sgn(W',j)=\sgn(p_1,j)$. Then by Theorem \ref{straightlineproof}, $\sgn(A,j)=\sgn(W',j)=\sgn(p_1,j)$ and the theorem holds. 
+Now consider the case where $\sgn(\cC(B_S),j)=+1$. First we will show that the theorem holds for $n=1$. Suppose $n=1$. If $1\notin S$, then $B_S=\{f_1\}$, and so $\cC(B_S)=B_S$, and the theorem holds. However, if $1\in \alpha_C \cup \alpha_R$, then $B_S=I_{*,1}=[\vartheta_1,\vartheta_1']$. Let $W=\{\vartheta_1\}$ and $W'=\{\vartheta'_1\}$. Note that $\cC(B_S)=\{W \cup W'\}$, and so by Theorem \ref{straightlineproof} the theorem holds.
+ 
+Now assume for all $n$-dimensional systems in the form of \eqref{generalsystem} the theorem holds. Consider any $(n+1)$-dimensional system in the form of \eqref{generalsystem}. Let $B_S$ be a box in $\bbR^{(n+1)}$ with associated $\alpha_{C,S}$ and $\alpha_{R,S}$, and suppose $\sgn(\cC(B_S),j)=+1$. If $S=\emptyset$, then $B_S$ is a single point and the proof is immediate. If $S \neq \emptyset$, then we can find some $k\in S$. Let $I_{*,k}$ be the associated interval of $B_S$ with endpoints $\vartheta_k$ and $\vartheta_k'$. Let $W=A \cap \{x_k=\vartheta_k\}$ and $W'=A \cap \{x_k=\vartheta_k'\}$. Notice that on the hyperplane $\{x_k=\vartheta_k\}$, the system reduces to an $n$-dimensional system. Also note that $\cC(W)\subseteq\cC(B_S)$, and so by Definition \ref{sgnDefn}, $\cC(W)=+1$, and by our inductive hypothesis $\sgn(W,j)=+1$. By a similar argument $\sgn(W',j)=+1$. Then by Theorem \ref{straightlineproof}, $\sgn(B_S,j)=\sgn(W\cup W',j)=+1$ and the theorem holds. A similar argument is used for the case where $\sgn(\cC(B_S),j)=-1$.
 \end{proof} 
 
 
 \begin{remark} \label{cornerpointsin0cell}
-We apply Theorem \ref{cornerpointproof} to the walls and cells of $\textnormal{\textbf{RN}}$. Given any wall, we can now unambiguously determine the flow through the wall if we know the $\sgn$ of all corner points of that wall. Notice that for all $i\in\alpha_R$, $I_{R,i}=[r_i^-,r_i^+]$, and recall that every Type R interval is connected to two Type C intervals and all intervals are closed, and so there must exists two Type C intervals $I_{C,i}$ and $I_{C,i}'$ such that $r_i^-\in I_{C,i}$ and  $r_i^+\in I_{C,i}'$. Then it follows that for each point $p\in\bbP(\kappa)$, there exists some $0$-cell $\kappa^*$, and some wall $\tau^*$ of $\kappa^*$ such that $p\in\tau^*$. 
+We apply Theorem \ref{cornerpointproof} to the walls of $\textnormal{\textbf{RN}}$. Given any wall $\tau$ with normal vector $\vec{e}_k$, we can now unambiguously determine the flow through $\tau$ if we know $\sgn(\cC(\tau),k)$ of all corner points of that wall. Notice that for all $i\in\alpha_R$, $I_{R,i}=[r_i^-,r_i^+]$, and recall that every Type R interval is connected to two Type C intervals and all intervals are closed, and so there must exists two Type C intervals $I_{C,i}$ and $I_{C,i}'$ such that $r_i^-\in I_{C,i}$ and  $r_i^+\in I_{C,i}'$. Then it follows that for each point $p\in\cC(\tau)$, there exists some $0$-cell $\kappa^*$, and some wall $\tau^*$ of $\kappa^*$ such that $p\in\tau^*$. 
 
-Furthermore, note that for any wall $\tau$, if $\tau$ is a wall of some cell $\kappa$, then $\bbP(\tau)\subset \bbP(\kappa)$, and so all points in $\bbP(\tau)$ are also contained in the wall of a zero cell. By our assumptions, all walls of zero cells have defined, non-zero $\sgn$. We use this fact to unambiguously determine the flow through all walls of $\textnormal{\textbf{RN}}$, and then to construct the domain graph of $\textnormal{\textbf{RN}}$.
+Furthermore, note that for any wall $\tau$, if $\tau$ is a wall of some cell $\kappa$, then $\cC(\tau)\subset \cC(\kappa)$, and so all points in $\cC(\tau)$ are also contained in the wall of a zero cell. By our assumptions, all walls of zero cells have defined, non-zero $\sgn$. We use this fact to unambiguously determine the flow through all walls of $\textnormal{\textbf{RN}}$, and then to construct the domain graph of $\textnormal{\textbf{RN}}$.
 \end{remark}
+
+
+\begin{theorem}
+Let $B_S$ be a box in $\bbR^n$. If for all $j\in\{1,\dots,n\}$, $\sgn(\cC(B_S),j)=0$, then $B_S$ contains a {\color{cyan} Peter: fixed point/attracting/repelling point? Not sure what to call it.}
+
+\end{theorem}
 
 \section{Algorithm}
 
 \begin{defn}
-Suppose $\tau$ is some wall of an $m$-cell where $m\neq 0$, with associated $\alpha_C$ and $\alpha_R$. Let $\bbP (\tau)$ be the associated set of corner points. We define the \textit{reduced set of corner points}, denoted $\bar \bbP (\tau)$ as $
-\bar \bbP (\kappa) := \prod_{i=1}^n \bar P_i$,
+Suppose $\tau$ is some wall of an $m$-cell where $m\neq 0$, with associated $\alpha_C$ and $\alpha_R$. Let $\cC (\tau)$ be the associated set of corner points. We define the \textit{reduced set of corner points}, denoted $\bar \cC (\tau)$ as $
+\bar \cC (\tau) := \prod_{i=1}^n \bar P_i$,
 where $\bar P_i$ is the set defined as defined as
 \begin{equation*}
 \bar P_i :=
@@ -268,11 +225,11 @@ where $\bar P_i$ is the set defined as defined as
 \{c_i^*\} &  \text{ if } i\in \alpha_C \\
 \end{cases}
 \end{equation*}
-where $c^*_i$ is an arbitrary value chosen such that $c^*_i \in I_{C,i}$. Note that the cardinality  $\bar \bbP (\tau)$ is $2^m$, where $m$ is the cardinality of $\alpha_R$.  Let $\bar p_i$ be a component of $\bar \bbP (\tau)$.
+where $c^*_i$ is an arbitrary value chosen such that $c^*_i \in I_{C,i}$. Note that the cardinality  $\bar \cC (\tau)$ is $2^m$, where $m$ is the cardinality of $\alpha_R$.  Let $\bar p_i$ be a component of $\bar \cC (\tau)$.
 \end{defn}
 
 \begin{algorithm*}
-For each wall $\tau$ of an $m$-cell where $m\neq 0$ and $\tau \subseteq \{x_k=\vartheta_k\}$, let $\bbP (\tau)$ be the associated set of corner points, and let $\bar \bbP (\tau)$ be the reduced set of corner points. For each $\bar p_i \in  \bar \bbP (\tau)$, let $S_i := \sgn(\bar p_i, k)$. 
+For each wall $\tau$ of an $m$-cell where $m\neq 0$ and $\tau \subseteq \{x_k=\vartheta_k\}$, let $\cC (\tau)$ be the associated set of corner points, and let $\bar \cC (\tau)$ be the reduced set of corner points. For each $\bar p_i \in  \bar \cC (\tau)$, let $S_i := \sgn(\bar p_i, k)$. 
 \begin{equation} \label{algorithmequation}
 \text{If } \abs{\sum_{i=1}^{2^m}S_i}<\sum_{i=1}^{2^m} \abs{S_i},\text{ then }\sgn(\tau,k)=0;\text{ otherwise }\sgn(\tau,k)=S_1.
 \end{equation}
