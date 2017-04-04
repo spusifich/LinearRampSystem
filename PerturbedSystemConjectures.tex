@@ -1,0 +1,88 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[top=1in, bottom=1in, left=0.75in, right=1in]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{automata,topaths,arrows}
+\usepackage{graphicx}
+\usepackage{ulem}
+\usepackage{parskip}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{cor}{Corollary}[section]
+\newtheorem{con}{Conjecture}[section]
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+
+
+\begin{document}
+
+\section*{Outline of conjectures}
+
+{\color{red} All of this needs to be written more rigorously. In particular, there isn't a good separation between cells in phase space and nodes in the domain graph. That needs to be fixed, using notation from the parameter graph paper.}
+
+\vspace{12pt}
+
+
+\begin{defn}
+	Let $\kappa$ be a domain in the phase space of a switching system with a regular parameter such that $\kappa$ has bordering hyperplanes $\{x_i = \theta_{j_i,i}\}$.	Consider a perturbed system such that the order of the thresholds is preserved. Then there exists a 0-cell $\kappa_0$ in the perturbed phase space with bordering hyperplanes $\{x_i = \theta_{j_i,i} \pm \epsilon_{j_i,i}\}$. {\color{red} Construct this more carefully using left and right faces.} We call $\kappa$ and $\kappa_0$ \textit{corresponding domains} in the switching and perturbed systems, and we write 
+	\[
+	\beta : \kappa \mapsto \kappa_0
+	\] 
+	as the correspondence bijection.
+	A \textit{canonical perturbation} of a switching system with a regular parameter is a perturbation such that threshold order is preserved, and if $\Lambda(\kappa) \in \kappa'$ in the switching system, then $\Lambda \circ \beta(\kappa) \in \beta(\kappa')$ in the perturbed system.
+\end{defn}
+
+\vspace{12pt}
+
+\begin{con}\label{con:equivpath}
+	There exists a path from $\kappa$ to $\kappa'$ in the switching domain graph iff there exists a path from $\beta(\kappa)$ to $\beta(\kappa')$ in the canonical perturbed system that has alternating 0- and 1-cells.
+\end{con}
+\begin{proof}
+\end{proof}
+
+\vspace{12pt}
+
+
+\begin{cor}\label{cor:ordpreserv}
+	There exists an order-preserving map $\phi$ from the Morse decomposition of the switching system to that of the canonical perturbed system: 
+	\[ \phi: \mathsf{MD}_s \to \mathsf{MD}_p. \]
+\end{cor}
+\begin{proof}
+	{\color{red} Rough sketch. Needs detail.}
+	Let $U,V \in \mathsf{MD}_s$ with $U < V$. {\color{red} We will have to carefully define Morse decompositions and fix the notation in this proof.} $U$ and $V$ are maximal strongly connected components in the switching domain graph such that there exists a path from $V$ to $U$ in the switching domain graph. Take the collection of paths between domains in $U$. By Conjecture~\ref{con:equivpath}, each of these paths exists in the perturbed domain graph in the corresponding 0-cells $U_0 = \beta(U)$ with the addition of a set of intermediate 1-cells $U_1$. {\color{red} Detail, construct $U_1$ carefully.} Therefore, $ U_0 \cup U_1$ is a strongly connected component in the perturbed domain graph.  Let $U'$ be the maximal strongly connected component containing $U_0 \cup U_1$. Likewise, let $V' \supseteq \beta(V) \cup V_1$ be a maximal strongly connected component in the perturbed domain graph. By definition, $U',V' \in \mathsf{MD}_p$. Since there is a path from an element of $V$ to an element of $U$, by Conjecture~\ref{con:equivpath}, there is also a path from $V'$ to $U'$ {\color{red} (construct carefully)}, so that $U' \leq V'$. By defining $\phi(U) = U'$ and $\phi(V) = V'$, we have achieved a well-defined order-preserving map. 
+\end{proof}
+
+\begin{con}\label{con:transverse}
+	Consider a switching system such that the phase plane exhibits only transverse walls (no black, white, or tangential walls). If there exists a path from $\kappa_0$ to $\kappa_0'$ in the canonical perturbed domain graph via any sequence of cells, then there exists a path from $\kappa_0$ to $\kappa_0'$ that alternates between 0- and 1-cells.
+\end{con}
+\begin{proof}
+\end{proof}
+
+\vspace{12pt}
+
+
+This result does not hold for switching systems with at least one non-transverse wall. {\color{red} Add 2D black wall example and 3D white example. Be sure to show the difference in the Morse graphs.}
+
+\vspace{12pt}
+
+
+\begin{cor}
+	For switching systems with regular parameters and no self-regulation and the canonical perturbation, there exists an order-preserving injection
+	\[ \phi: \mathsf{MD}_s \hookrightarrow \mathsf{MD}_p. \]	
+\end{cor}
+\begin{proof}
+	By Corollary~\ref{cor:ordpreserv}, there exists an order-preserving map $\phi$. It remains to show that $\phi$ is injective. If the switching system has a regular parameter, then it has no tangential walls. Likewise, with no self-regulation it has no black or white walls. So the switching system under consideration has only transverse walls and Conjecture~\ref{con:transverse} applies. Let $U,V \in \mathsf{MD}_s$ and suppose $U' = \phi(U) = \phi(V) \in \mathsf{MD}_p$ as constructed in the proof of Corollary~\ref{cor:ordpreserv}. In particular, the node sets $U$ and $V$ correspond to subsets of $\beta^{-1}(U_0)$. It is our goal to show that $U = V = \beta^{-1}(U_0)$.
+
+	$U'$ is a maximal strongly connected component, so consider a path from any $\kappa_0 \in U'$ to any $\kappa_0' \in U'$. Regardless of the exact form of the path, we know from Conjecture~\ref{con:transverse} that there exists a path from $\kappa_0$ to $\kappa_0'$ composed solely of alternating 0- and 1-cells. By Conjecture~\ref{con:equivpath}, there must exist a path from $\kappa = \beta^{-1}(\kappa_0)$ to $\kappa' = \beta^{-1}(\kappa_0')$ in the switching domain graph. This is true for arbitrary $\kappa_0$, $\kappa_0'$, therefore $\beta^{-1}(U_0)$ must be strongly connected. Thus $U = V = \beta^{-1}(U_0)$. 
+\end{proof}
+
+Even with all transverse walls, there is not in general an isomorphism between $\mathsf{MD}_s$ and $\mathsf{MD}_p$. {\color{red} Add 2D bistability example where we pick up a saddle point.}
+
+\end{document}
